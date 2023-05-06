@@ -38,6 +38,10 @@ Please configure `/etc/umicat/config.conf` before you start using it:
 }
 ```
 
+```bash
+python server.py
+```
+
 ## License
 
 PathSentinel is licensed under the [BSD-2 License](./LICENSE).
