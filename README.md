@@ -12,7 +12,7 @@ PathSentinel is an application firewall that focuses on HTTP path protection. It
 
 PathSentinel is easy to get started with. Simply deploy it as a reverse proxy in front of your web server and configure it to start monitoring HTTP traffic. PathSentinel will automatically detect and respond to potential threats to your web applications.
 
-Please configure `/etc/umicat/config.conf` before you start using it:
+Please configure `config.conf` before you start using it:
 ```json
 {
     "host": "0.0.0.0",
