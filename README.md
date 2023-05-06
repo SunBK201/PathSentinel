@@ -2,7 +2,7 @@
 
 PathSentinel is an application firewall that focuses on HTTP path protection. It uses deep neural network technology to provide web application security measures. PathSentinel is deployed using a reverse proxy, which provides robust protection for your web server.
 
-# Features
+## Features
 
 -   Comprehensive HTTP path protection: PathSentinel provides robust security measures against various attacks targeted at HTTP paths, including SQL injection, cross-site scripting, and path traversal attacks.
 -   Advanced artificial intelligence technology: PathSentinel's deep neural network technology accurately detects and responds to potential threats, providing intelligent defense for your web applications.

@@ -1,15 +1,15 @@
 {
     "host": "0.0.0.0",
-    "port": 9090,
+    "port": 80,
     "upstream": [
         {
             "upstream_addr": "127.0.0.1",
-            "upstream_port": 80,
+            "upstream_port": 9090,
             "weight": 2
         },
         {
             "upstream_addr": "127.0.0.1",
-            "upstream_port": 81,
+            "upstream_port": 9090,
             "weight": 2
         }
     ],

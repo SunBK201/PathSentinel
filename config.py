@@ -1,9 +1,7 @@
 import json
 import logging
-import pathlib
 
 import upstream
-
 
 class Context:
     port = 80
@@ -14,9 +12,18 @@ class Context:
     firewall_enabled = True
     model = None
 
-    def __init__(self) -> None:
-        self.parse_config("config.json")
+    def __init__(self, config_path) -> None:
+        self.parse_config(config_path)
         self.init_logger()
+    
+    def __new__(cls, *args, **kwargs):
+        if not hasattr(Context, "_instance"):
+            Context._instance = object.__new__(cls)
+        return Context._instance
+
+    @classmethod
+    def get_context(self):
+        return Context._instance
 
     def init_logger(self):
         self.logger.setLevel(self.log_level)
@@ -35,8 +42,6 @@ class Context:
         self.logger.addHandler(fh)
 
     def parse_config(self, path: str = "config.json"):
-        BASE_DIR = pathlib.Path(__file__).parent
-        path = BASE_DIR / 'config.json'
         with open(path, "r") as config:
             config_data = json.load(config)
             self.port = config_data["port"]
@@ -51,4 +56,5 @@ class Context:
             self.firewall_enabled = config_data["firewall"]["enable"]
             self.model = config_data["firewall"]["model"]
 
-context = Context()
+if __name__ == "__main__":
+    pass

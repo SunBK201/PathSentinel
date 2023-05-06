@@ -2,8 +2,11 @@ from aiohttp import web
 import aiohttp
 import time
 
-from config import context
+import config
 import detect
+
+context = config.Context("conf/config.json")
+sentinel = detect.Sentinel(context=context)
 
 
 async def persistent_session(app):
@@ -90,7 +93,7 @@ async def all_handler(request):
 
     if context.firewall_enabled == True:
         payload = request2dict(method, addr, port, path, remote)
-        result = detect.detect(payload)
+        result = sentinel.detect(payload)
         if result == detect.ATTACK:
             context.logger.warning(path + " (Attack)")
             return web.HTTPForbidden()
@@ -106,13 +109,14 @@ if __name__ == "__main__":
     app = web.Application()
     app.cleanup_ctx.append(persistent_session)
     app.add_routes([web.route("*", "/{path_info:.*}", all_handler)])
-    print("pywaf version: 0.0.1")
+    print("PathSentinel version: 0.0.1")
     context.logger.info("start listen: " + str(context.port))
     context.logger.info("upstream server: " + str(len(context.upstream)))
     for ups in context.upstream:
         context.logger.info(
             "upstream server "
-            + ups.addr + ":"
+            + ups.addr
+            + ":"
             + str(ups.port)
             + ", weight="
             + str(ups.weight)
