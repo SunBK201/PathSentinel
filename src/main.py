@@ -17,28 +17,6 @@ async def persistent_session(app):
     await session.close()
 
 
-def test_request(request):
-    print("host:", request.host, "type:", type(request.host))
-    print("remote:", request.remote, "type:", type(request.remote))
-    print("method:", request.method, "type:", type(request.method))
-    print("scheme:", request.scheme, "type:", type(request.scheme))
-    print("request.url:", request.url, "type:", type(request.url))
-    print("request.rel_url:", request.rel_url, "type:", type(request.rel_url))
-    print("request.forwarded:", request.forwarded, "type:", type(request.forwarded))
-    print("request.headers:", request.headers, "type:", type(request.headers))
-    print(
-        "request.raw_headers:", request.raw_headers, "type:", type(request.raw_headers)
-    )
-    print("request.keep_alive:", request.keep_alive, "type:", type(request.keep_alive))
-
-
-async def get_up(url):
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url) as resp:
-            text = await resp.text()
-            return web.Response(text=text)
-
-
 def request2dict(method, addr, port, path, remote):
     """request data to dict"""
     payload = {

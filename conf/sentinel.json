@@ -9,9 +9,9 @@
             "weight": 2
         },
         {
-            "upstream_addr": "www.baidu.com",
-            "upstream_port": 80,
-            "weight": 2
+            "upstream_addr": "127.0.0.1",
+            "upstream_port": 9091,
+            "weight": 3
         }
     ],
     "log_level": "INFO",

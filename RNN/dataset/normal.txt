@@ -11,6 +11,7 @@
 /profile/
 /docs/stable/data.html
 /hello-world/
+/get
 /tienda1/index.jsp
 /tienda1/publico/anadir.jsp?id=3&nombre=Vino+Rioja&precio=100&cantidad=55&B1=A%F1adir+al+carrito
 /tienda1/publico/autenticar.jsp?modo=entrar&login=choong&pwd=d1se3ci%F3n&remember=off&B1=Entrar
