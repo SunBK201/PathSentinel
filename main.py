@@ -85,10 +85,12 @@ async def forward(session, method, url, headers, body=None):
 
 
 async def all_handler(request):
+    node = context.nodeSelector.getNode()
+    addr = node.addr
+    port = node.port
+
     method = request.method
     scheme = request.scheme
-    addr = context.upstream[0].addr
-    port = context.upstream[0].port
     path = str(request.rel_url)
     remote = request.remote
     url = scheme + "://" + addr + ":" + str(port) + path
@@ -100,7 +102,7 @@ async def all_handler(request):
             context.logger.warning(path + " (Attack)")
             return web.HTTPForbidden()
 
-    context.logger.info(path)
+    context.logger.info(f"{addr}:{port} {path}")
     headers = request.headers.copy()
     headers["host"] = addr + ":" + str(port)
     body = await request.read()
@@ -110,8 +112,8 @@ async def all_handler(request):
 def log_basic_info():
     print(f"PathSentinel version: {VERSION}")
     context.logger.info("start listen: " + str(context.port))
-    context.logger.info("upstream server: " + str(len(context.upstream)))
-    for ups in context.upstream:
+    context.logger.info("upstream server: " + str(len(context.upstreamList)))
+    for ups in context.upstreamList:
         context.logger.info(
             "upstream server "
             + ups.addr

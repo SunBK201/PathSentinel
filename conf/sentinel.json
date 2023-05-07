@@ -1,6 +1,7 @@
 {
     "host": "0.0.0.0",
     "port": 80,
+    "policy": "round_robin",
     "upstream": [
         {
             "upstream_addr": "127.0.0.1",
@@ -8,15 +9,15 @@
             "weight": 2
         },
         {
-            "upstream_addr": "127.0.0.1",
-            "upstream_port": 9090,
+            "upstream_addr": "www.baidu.com",
+            "upstream_port": 80,
             "weight": 2
         }
     ],
     "log_level": "INFO",
     "log_file": "log/access.log",
     "firewall": {
-        "enable": true,
+        "enable": false,
         "model": "4w.pt"
     }
 }

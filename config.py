@@ -7,7 +7,8 @@ import upstream
 
 class Context:
     port = 80
-    upstream = []
+    upstreamList = []
+    nodeSelector = None
     log_file_path = "access.log"
     log_level = logging.INFO
     argparser = argparse.ArgumentParser(description=f"PathSentinel")
@@ -20,6 +21,7 @@ class Context:
         self.init_argparser()
         self.parse_config(self.args.config)
         self.init_logger()
+        self.init_nodeSelector()
 
     def __new__(cls, *args, **kwargs):
         if not hasattr(Context, "_instance"):
@@ -29,6 +31,9 @@ class Context:
     @classmethod
     def get_context(self):
         return Context._instance
+    
+    def init_nodeSelector(self):
+        self.nodeSelector = upstream.NodeSelector(self.upstreamList)
 
     def init_logger(self):
         self.logger.setLevel(self.log_level)
@@ -75,7 +80,7 @@ class Context:
             config_data = json.load(config)
             self.port = config_data["port"]
             for srv in config_data["upstream"]:
-                self.upstream.append(
+                self.upstreamList.append(
                     upstream.UpstreamServer(
                         srv["upstream_addr"], srv["upstream_port"], srv["weight"]
                     )
