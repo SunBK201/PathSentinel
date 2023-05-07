@@ -13,6 +13,10 @@ PathSentinel is an application firewall that focuses on HTTP path protection. It
 
 PathSentinel is easy to get started with. Simply deploy it as a reverse proxy in front of your web server and configure it to start monitoring HTTP traffic.
 
+```bash
+python src/main.py -c conf/sentinel.json -l access.log
+```
+
 Please configure `conf/sentinel.json` before you start using it:
 ```json
 {
@@ -38,10 +42,6 @@ Please configure `conf/sentinel.json` before you start using it:
         "model": "10w.pt"
     }
 }
-```
-
-```bash
-python src/main.py -c conf/sentinel.json -l access.log
 ```
 
 ## Load Balance Policy
