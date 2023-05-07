@@ -34,8 +34,8 @@ Please configure `conf/sentinel.json` before you start using it:
     "log_level": "INFO",	
     "log_file": "access.log",	
     "firewall": {	
-        "enable": false,	
-        "model": "4w.pt"	
+        "enable": true,	
+        "model": "10w.pt"	
     }	
 }	
 ```	
