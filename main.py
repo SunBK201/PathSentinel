@@ -2,10 +2,12 @@ from aiohttp import web
 import aiohttp
 import time
 
-import config
+from config import Context
 import detect
 
-context = config.Context("conf/config.json")
+VERSION = "0.0.1"
+
+context = Context()
 sentinel = detect.Sentinel(context=context)
 
 
@@ -105,11 +107,8 @@ async def all_handler(request):
     return await forward(request.app["PERSISTENT_SESSION"], method, url, headers, body)
 
 
-if __name__ == "__main__":
-    app = web.Application()
-    app.cleanup_ctx.append(persistent_session)
-    app.add_routes([web.route("*", "/{path_info:.*}", all_handler)])
-    print("PathSentinel version: 0.0.1")
+def log_basic_info():
+    print(f"PathSentinel version: {VERSION}")
     context.logger.info("start listen: " + str(context.port))
     context.logger.info("upstream server: " + str(len(context.upstream)))
     for ups in context.upstream:
@@ -123,5 +122,14 @@ if __name__ == "__main__":
         )
     context.logger.info("firewall enabled: " + str(context.firewall_enabled))
     context.logger.info("firewall model: " + context.model)
-    context.logger.info("log file: " + context.log_file)
+    context.logger.info("log file: " + context.log_file_path)
+
+
+if __name__ == "__main__":
+    app = web.Application()
+    app.cleanup_ctx.append(persistent_session)
+    app.add_routes([web.route("*", "/{path_info:.*}", all_handler)])
+
+    log_basic_info()
+
     web.run_app(app, port=context.port, access_log=None)
