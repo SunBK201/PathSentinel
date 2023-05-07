@@ -15,9 +15,9 @@
         }
     ],
     "log_level": "INFO",
-    "log_file": "log/access.log",
+    "log_file": "access.log",
     "firewall": {
         "enable": false,
-        "model": "4w.pt"
+        "model": "model/4w.pt"
     }
 }

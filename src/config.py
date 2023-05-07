@@ -63,7 +63,7 @@ class Context:
         self.argparser.add_argument(
             "--config",
             "-c",
-            default="conf/sentinel.json",
+            default="../conf/sentinel.json",
             type=str,
             help="set config file path",
         )
