@@ -85,7 +85,7 @@ async def forward(session, method, url, headers, body=None):
 
 
 async def all_handler(request):
-    node = context.nodeSelector.getNode()
+    node = context.nodeSelector.getNode(request.remote)
     addr = node.addr
     port = node.port
 

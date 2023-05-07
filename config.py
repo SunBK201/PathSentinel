@@ -16,6 +16,7 @@ class Context:
     logger = logging.getLogger("context")
     firewall_enabled = True
     model = None
+    policy: str = None
 
     def __init__(self) -> None:
         self.init_argparser()
@@ -31,7 +32,7 @@ class Context:
     @classmethod
     def get_context(self):
         return Context._instance
-    
+
     def init_nodeSelector(self):
         self.nodeSelector = upstream.NodeSelector(self.upstreamList)
 
@@ -79,6 +80,7 @@ class Context:
         with open(path, "r") as config:
             config_data = json.load(config)
             self.port = config_data["port"]
+            self.policy = config_data["policy"]
             for srv in config_data["upstream"]:
                 self.upstreamList.append(
                     upstream.UpstreamServer(
