@@ -66,4 +66,4 @@ class RNNSentinel:
 
 
 if __name__ == "__main__":
-    rnn = RNNSentinel(pt_path="4w.pt")
+    rnn = RNNSentinel(pt_path="30w.pt")
